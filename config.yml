@@ -1,0 +1,50 @@
+---
+# Definições do servidor Apache (httpd)
+httpd:
+  # Nome do servidor
+  server_name: www.example.com
+  
+  # Porta de escuta do servidor
+  listen_port: 80
+  
+  # Endereço IP do servidor
+  server_ip: 192.168.0.100
+  
+  # Diretório raiz do servidor
+  document_root: /var/www/html
+  
+  # Definições de módulos do servidor
+  modules:
+    # Módulo para suporte a PHP
+    php:
+      enabled: true
+      version: 7.4
+      extensions:
+        - gd
+        - pdo_mysql
+        - opcache
+      
+    # Módulo de cache
+    cache:
+      enabled: true
+      type: disk
+      cache_dir: /var/cache/httpd
+      
+  # Definições de diretórios
+  directories:
+    # Diretório raiz
+    /var/www/html:
+      options: FollowSymLinks
+      allow_override: All
+      require: all granted
+      
+    # Diretório para arquivos de configuração
+    /etc/httpd:
+      options: None
+      allow_override: None
+      require: all denied
+      
+  # Definições da aplicação
+  app:
+    # Diretório raiz da aplicação
+    root_directory: /var/www/html/hello_world
